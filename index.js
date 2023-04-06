@@ -22,8 +22,6 @@ const getSchemes = (colorInHex) => {
 
 getSchemes()
 
-let html = ''
-
 getColorBtn.addEventListener('click', () => {
     colorSection.innerHTML = ''
     const selectedColor = selectScheme.value
@@ -33,12 +31,14 @@ getColorBtn.addEventListener('click', () => {
         .then(response => response.json())
         .then(data => {
             console.log(data)
+            let html = ''
             const colorSchemeArr = data.colors
             colorSchemeArr.map(colorSection => {
                 const colorsHex = colorSection.hex.value
-                footer.innerHTML += `
+                html += `
                 <div class="hex-input">${colorsHex}</div>`
                     getSchemes(colorsHex)
             })
+            footer.innerHTML = html
         }) 
 })
